@@ -19,7 +19,29 @@
 
 
         </div>
-        <footer></footer>
+        <div class="addbook">
+            <h3>Add a new book to your library</h3>
+            <TextField id="filled-basic" label="Filled" variant="filled" />
+
+            <form action="post">
+                <p id="p__form__title">
+                    <label for="form__title">Book title</label>
+                    <input type="text" name="form__title" id="form__title" placeholder="Book Title"></input>
+                </p>
+                <p id="p__form__author">
+                    <label for="form__author">Book author</label>
+                    <input type="text" name="form__author" id="form__author" placeholder="Book Author"></input>
+                </p>
+                <p id="p_form__read">
+                    <label for="form__read">Read?</label>
+                    <input type="checkbox" name="form__read" id="form__read"></input>
+                </p>
+                <button type="submit" class="btnsubmit">Submit</button>
+            </form>
+        </div>
+        <footer>
+            Created by <a href="https://github.com/artlp">artlp</a>
+        </footer>
         </div>
 
 
