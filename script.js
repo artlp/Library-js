@@ -38,7 +38,7 @@ const closeModal = function () {
     overlay.classList.add("hidden");
 };
 
-
+const setTheme = theme => document.documentElement.className = theme;
 closeModalBtn.addEventListener("click", closeModal);
 overlay.addEventListener("click", closeModal);
 
@@ -55,10 +55,11 @@ const generateBookGrid = () => {
         dateAdded.innerHTML = `added on ${book.dateAdded}`;
         const btnDeleteBook = document.createElement("div");
         const readStatus = document.createElement("div")
+        readStatus.classList.add("readstatus__div")
         if (book.readStatus) {
-            readStatus.innerHTML = "✅"
+            readStatus.innerHTML = `<img src="./check-square.svg" class="readstatus_img" alt="read">`
         } else {
-            readStatus.innerHTML = "📖"
+            readStatus.innerHTML = `<img src="./book-open.svg" class="readstatus_img" alt="not read">`
         }
         btnDeleteBook.setAttribute("data-id", book.id);
         btnDeleteBook.innerHTML = "⨉";
