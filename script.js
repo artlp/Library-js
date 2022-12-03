@@ -41,18 +41,20 @@ const generateBookGrid = () => {
         maindiv.appendChild(readStatus);
         maindiv.appendChild(btnDeleteBook);
         bookGrid.appendChild(maindiv);
-    }
+        }
 };
 generateBookGrid();
 function addBook() {
     let bookX = new Book(bookTitle.value, bookAuthor.value, bookRead.checked);
+    bookTitle.value = '';
+    bookAuthor.value = '';
 }
 function refresh() {
-    bookGrid.load();
+    clearBookGrid();
+    generateBookGrid();
 }
 function clearBookGrid() {
     bookGrid.replaceChildren('');
-
 }
 
 btnSubmit.addEventListener('click', (event) => {
@@ -62,14 +64,11 @@ btnSubmit.addEventListener('click', (event) => {
     generateBookGrid();
 });
 
-const deleteButtons = document.querySelectorAll('.btnDelete');
-deleteButtons.forEach(e => {
-    e.addEventListener('click', () => {
-        console.log(e.dataset.id);
-        let itemToDelete = library[e.dataset.id];
-        console.log(itemToDelete)
-        library.splice(itemToDelete,1);
-        clearBookGrid();
-        generateBookGrid();
-    });
+bookGrid.addEventListener('click', (event) => {
+    if (event.target.classList.contains('btnDelete')) {
+        console.log(event.target.dataset.id);
+        let itemToDelete = library[event.target.dataset.id];
+        library.splice(itemToDelete, 1);
+        refresh();
+    }
 });
