@@ -6,7 +6,7 @@ class Book {
     constructor(title, author, readStatus) {
         this.title = title;
         this.author = author;
-        this.dateAdded = new Date().toLocaleString();
+        this.dateAdded = new Date().toDateString();
         this.readStatus = readStatus;
         library.push(this);
         this.id = counter++;
@@ -20,12 +20,14 @@ const bookRead = document.querySelector('#form__read');
 const modal = document.querySelector(".modal");
 const overlay = document.querySelector(".overlay");
 const closeModalBtn = document.querySelector(".btn-close");
+const titlePlaceHolder = document.querySelector("#title__placeholder");
+const authorPlaceHolder = document.querySelector("#author__placeholder");
 
 
-let book1 = new Book("History of Math", "artlp", false);
-let book2 = new Book("Another rainy day in Tomsk", "Lipskaia", true);
-let book3 = new Book("I ate a sword", "Sword Eater", false);
-let book4 = new Book("Basics of JS classes", "StackOverflow.com", true);
+let book1 = new Book("Gone with the Wind", "Margaret Mitchell", false);
+let book2 = new Book("The Great Gatsby", "F. Scott Fitzgerald", true);
+let book3 = new Book("Strands of Bronze and Gold", "Jane Nickerson", false);
+let book4 = new Book("The Hobbit", "J.R.R. Tolkien", true);
 
 const openModal = function () {
     modal.classList.remove("hidden");
@@ -34,7 +36,7 @@ const openModal = function () {
 const closeModal = function () {
     modal.classList.add("hidden");
     overlay.classList.add("hidden");
-  };
+};
 
 
 closeModalBtn.addEventListener("click", closeModal);
@@ -49,36 +51,45 @@ const generateBookGrid = () => {
         bookTitle.innerText = book.title;
         const bookAuthor = document.createElement("p");
         bookAuthor.innerText = `by ${book.author}`;
-        const readStatus = document.createElement("p");
-        readStatus.innerHTML = `added on ${book.dateAdded} <br> Read: ${book.readStatus}`;
+        const dateAdded = document.createElement("p");
+        dateAdded.innerHTML = `added on ${book.dateAdded}`;
         const btnDeleteBook = document.createElement("div");
+        const readStatus = document.createElement("div")
+        if (book.readStatus) {
+            readStatus.innerHTML = "✅"
+        } else {
+            readStatus.innerHTML = "📖"
+        }
         btnDeleteBook.setAttribute("data-id", book.id);
-        btnDeleteBook.innerHTML = "❌";
+        btnDeleteBook.innerHTML = "⨉";
         btnDeleteBook.classList.add("btnDelete");
+        maindiv.style.borderLeftColor = `rgb(${Math.floor(Math.random()*256)},${Math.floor(Math.random()*256)},${Math.floor(Math.random()*256)})`;
         maindiv.appendChild(bookTitle);
         maindiv.appendChild(bookAuthor);
-        maindiv.appendChild(readStatus);
+        maindiv.appendChild(dateAdded);
+        maindiv.appendChild(readStatus)
         maindiv.appendChild(btnDeleteBook);
         bookGrid.appendChild(maindiv);
     }
     const modalbtn = document.createElement('div');
     modalbtn.classList.add('bookitem');
     modalbtn.classList.add('btnopen');
-    modalbtn.innerText = "ADD NEW BOOK +"
+    modalbtn.innerText = "+";
     bookGrid.appendChild(modalbtn);
+    document.querySelector('.btnopen').addEventListener('click', openModal);
 
 };
 
-document.querySelector('.btnopen').addEventListener('click',openModal);
-
-
-
 generateBookGrid();
+
 function addBook() {
     let bookX = new Book(bookTitle.value, bookAuthor.value, bookRead.checked);
     bookTitle.value = '';
     bookAuthor.value = '';
+    bookTitle.style.outline = "none";
+    bookAuthor.style.outline = "none";
 }
+
 function refresh() {
     clearBookGrid();
     generateBookGrid();
@@ -89,17 +100,35 @@ function clearBookGrid() {
 
 btnSubmit.addEventListener('click', (event) => {
     event.preventDefault();
-    addBook();
-    closeModal();
-    clearBookGrid();
-    generateBookGrid();
+    if (bookTitle.checkValidity() && bookAuthor.checkValidity()) {
+        addBook();
+        closeModal();
+        clearBookGrid();
+        generateBookGrid();
+    } else {
+        bookTitle.style.outline = "2px solid red";
+        bookAuthor.style.outline = "2px solid red";
+    }
 });
 
 bookGrid.addEventListener('click', (event) => {
     if (event.target.classList.contains('btnDelete')) {
-        console.log(event.target.dataset.id);
         let itemToDelete = library[event.target.dataset.id];
         library.splice(itemToDelete, 1);
         refresh();
     }
+});
+
+
+bookTitle.addEventListener('focus', () => {
+    titlePlaceHolder.classList.add("placeholder__moved");
+});
+bookAuthor.addEventListener('focus', () => {
+    authorPlaceHolder.classList.add("placeholder__moved");
+});
+bookTitle.addEventListener('focusout', () => {
+    if (bookTitle.value === '') titlePlaceHolder.classList.remove("placeholder__moved");
+});
+bookAuthor.addEventListener('focusout', () => {
+    if (bookAuthor.value === '') authorPlaceHolder.classList.remove("placeholder__moved");
 });

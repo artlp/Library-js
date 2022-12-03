@@ -24,17 +24,15 @@
         <div class="modal hidden">
                 <h3>Add a new book</h3>
                 <button class="btn-close">⨉</button>
-            <TextField id="filled-basic" label="Filled" variant="filled" />
-
             <form action="post">
                 <p id="p__form__title">
                     <label for="form__title">Book title</label>
-                    <input type="text" name="form__title" id="form__title" placeholder="Book Title"></input>
-                </p>
+                    <input type="text" name="form__title" id="form__title" required ></input>
+                </p><span id="title__placeholder">Book Title</span>
                 <p id="p__form__author">
                     <label for="form__author">Book author</label>
-                    <input type="text" name="form__author" id="form__author" placeholder="Book Author"></input>
-                </p>
+                    <input type="text" name="form__author" id="form__author" required></input>
+                </p><span id="author__placeholder">Book Author</span>
                 <p id="p_form__read">
                     <label for="form__read">Read?</label>
                     <input type="checkbox" name="form__read" id="form__read"></input>
@@ -42,8 +40,6 @@
                 <button type="submit" class="btnsubmit">Submit</button>
             </form>
         </div>
-        <button class="btn btn-open2">Open Modal</button>
-
         <footer>
             Created by<a href="https://github.com/artlp"> &nbsp;artlp</a>
         </footer>
