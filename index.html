@@ -11,6 +11,8 @@
     </head>
 
     <body>
+        <div class="overlay hidden"></div>
+
         <div class="maincontainer">
         <header>
             <h1>Library</h1>
@@ -19,8 +21,9 @@
 
 
         </div>
-        <div class="addbook">
-            <h3>Add a new book to your library</h3>
+        <div class="modal hidden">
+                <h3>Add a new book</h3>
+                <button class="btn-close">⨉</button>
             <TextField id="filled-basic" label="Filled" variant="filled" />
 
             <form action="post">
@@ -39,12 +42,12 @@
                 <button type="submit" class="btnsubmit">Submit</button>
             </form>
         </div>
+        <button class="btn btn-open2">Open Modal</button>
+
         <footer>
             Created by<a href="https://github.com/artlp"> &nbsp;artlp</a>
         </footer>
         </div>
-
-
 
         <script src="./script.js"></script>
     </body>

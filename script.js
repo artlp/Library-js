@@ -1,4 +1,6 @@
 const library = [];
+
+
 let counter = 0;
 class Book {
     constructor(title, author, readStatus) {
@@ -15,12 +17,29 @@ const btnSubmit = document.querySelector('.btnsubmit');
 const bookTitle = document.querySelector('#form__title');
 const bookAuthor = document.querySelector('#form__author');
 const bookRead = document.querySelector('#form__read');
-// const varName = document.querySelector('cssSelector');
+const modal = document.querySelector(".modal");
+const overlay = document.querySelector(".overlay");
+const closeModalBtn = document.querySelector(".btn-close");
+
 
 let book1 = new Book("History of Math", "artlp", false);
 let book2 = new Book("Another rainy day in Tomsk", "Lipskaia", true);
 let book3 = new Book("I ate a sword", "Sword Eater", false);
 let book4 = new Book("Basics of JS classes", "StackOverflow.com", true);
+
+const openModal = function () {
+    modal.classList.remove("hidden");
+    overlay.classList.remove("hidden");
+};
+const closeModal = function () {
+    modal.classList.add("hidden");
+    overlay.classList.add("hidden");
+  };
+
+
+closeModalBtn.addEventListener("click", closeModal);
+overlay.addEventListener("click", closeModal);
+
 
 const generateBookGrid = () => {
     for (const book of library) {
@@ -41,8 +60,19 @@ const generateBookGrid = () => {
         maindiv.appendChild(readStatus);
         maindiv.appendChild(btnDeleteBook);
         bookGrid.appendChild(maindiv);
-        }
+    }
+    const modalbtn = document.createElement('div');
+    modalbtn.classList.add('bookitem');
+    modalbtn.classList.add('btnopen');
+    modalbtn.innerText = "ADD NEW BOOK +"
+    bookGrid.appendChild(modalbtn);
+
 };
+
+document.querySelector('.btnopen').addEventListener('click',openModal);
+
+
+
 generateBookGrid();
 function addBook() {
     let bookX = new Book(bookTitle.value, bookAuthor.value, bookRead.checked);
@@ -60,6 +90,7 @@ function clearBookGrid() {
 btnSubmit.addEventListener('click', (event) => {
     event.preventDefault();
     addBook();
+    closeModal();
     clearBookGrid();
     generateBookGrid();
 });
