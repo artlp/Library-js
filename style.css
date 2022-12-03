@@ -255,9 +255,9 @@ footer a {
 }
 
 .btnsubmit {
-    background-color: #09151c;
+    background: var(--text-color);
+    color: var(--bg-color);
     border-radius: 5px;
-    color: white;
     cursor: pointer;
     display: inline-block;
     font-size: 1em;
@@ -265,6 +265,12 @@ footer a {
     padding: 0.8rem 1.4rem;
     text-align: center;
     width: 100%;
+  }
+
+  .btnsubmit:hover {
+    -webkit-filter:brightness(125%);
+            filter:brightness(125%)
+
   }
 
   input[type="text"] {
@@ -322,14 +328,13 @@ input[type="text"]:focus{
   }
 
 .placeholder__moved {
-    -webkit-filter: brightness(45%);
-            filter: brightness(45%);
+    -webkit-filter: brightness(85%);
+            filter: brightness(85%);
     font-size: 0.8rem;
     transform:translateY(-2rem);
   }
 .theme-btn.light {
     display: none;
-
     }
  
 .dark .theme-btn.light {
