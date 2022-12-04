@@ -75,7 +75,8 @@ const generateBookGrid = () => {
     const modalbtn = document.createElement('div');
     modalbtn.classList.add('bookitem');
     modalbtn.classList.add('btnopen');
-    modalbtn.innerText = "+";
+    modalbtn.innerHTML = `+ <span class="tooltiptext">Add a new book</span>
+    `;
     bookGrid.appendChild(modalbtn);
     document.querySelector('.btnopen').addEventListener('click', openModal);
 

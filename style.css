@@ -50,6 +50,7 @@
     }
 * {
     box-sizing: inherit;
+    transition: background 0.4s ease-out;
 }
 html, body {
     background: var(--bg-color);
@@ -116,7 +117,6 @@ h2, h3 {
     color: var(--text-color);
     cursor:default;
     font-weight: 500;
-
 }
 
 .bookdisplay {
@@ -147,15 +147,19 @@ h2, h3 {
     background: rgba(255, 255, 255, 0.603);
     border: 4px dashed grey;
     box-shadow: none;
-    color: grey;
     font-size: 6rem;
     text-align: center;
+    cursor: pointer;
+    color: var(--header-bg-color);
+    transition: all 0.4s linear;
 
 }
 
 h2 {
     margin: 0;
-    padding: 0 7% 0 0;
+    padding: 0 8% 0 0;
+    overflow-wrap: break-word;
+
 }
 .modal {
     -webkit-animation-duration: 0.4s;
@@ -307,10 +311,6 @@ input[type="text"]:focus{
     opacity: 0;
   }
 
-.btnopen {
-    cursor: pointer;
-  }
-
 #title__placeholder, #author__placeholder {
     color:rgb(120, 120, 120);
     height: 0;
@@ -349,3 +349,42 @@ input[type="text"]:focus{
 .theme-btn.dark {
         fill:var(--header-text-color);
     }
+
+
+.tooltiptext {
+    visibility: hidden;
+    width: 140px;
+    background-color: var(--header-bg-color);
+    color: var(--header-text-color);
+    text-align: center;
+    padding: 5px 5px;
+    border-radius: 6px;
+    font-size: 1rem;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--header-bg-color) transparent transparent transparent;
+}
+    
+.btnopen:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+.btnopen:hover {
+    border-color: var(--header-bg-color);
+}
+
